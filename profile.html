@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <!-- FontAwesome 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    />
+
+    <style>
+      /* Import Font Dancing Script */
+      @import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+
+      * {
+        margin: 0;
+      }
+
+      body {
+        background-color: rgb(68,68,66);
+        font-family: Arial;
+      }
+
+      /* NavbarTop */
+      .navbar-top {
+        background: rgb(45,45,45);
+        color: rgb(155,155,155);
+        height: 70px;
+        z-index: 1;
+      }
+
+      .title {
+        font-family: "Dancing Script", cursive;
+        padding-top: 15px;
+        position: absolute;
+        left: 45%;
+      }
+
+      .navbar-top ul {
+        float: right;
+        list-style-type: none;
+        margin: 0;
+        overflow: hidden;
+        padding: 18px 50px 0 40px;
+      }
+
+      .navbar-top ul li {
+        float: left;
+      }
+
+      .navbar-top ul li a {
+        color: rgb(155,155,155);
+        padding: 14px 16px;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      /* Sidenav */
+      .sidenav {
+        background-color: rgb(68,68,66);
+        color: rgb(155,155,155);
+        border-bottom-right-radius: 25px;
+        height: 970px;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+        position: absolute;
+        top: 70px;
+        width: 250px;
+      }
+
+      .profile {
+        margin-bottom: 20px;
+        margin-top: -12px;
+        text-align: center;
+      }
+
+      /* .profile img {
+        border-radius: 50%;
+        box-shadow: 0px 0px 5px 1px grey;
+      } */
+
+      .name {
+        font-size: 20px;
+        font-weight: bold;
+        padding-top: 20px;
+      }
+
+      .job {
+        font-size: 16px;
+        font-weight: bold;
+        padding-top: 10px;
+      }
+
+      .url,
+      hr {
+        text-align: center;
+      }
+
+      .url hr {
+        margin-left: 20%;
+        width: 60%;
+      }
+
+      .url p {
+        color: rgb(155,155,155);
+        display: block;
+        font-size: 20px;
+        margin: 10px 0;
+        padding: 6px 8px;
+        text-decoration: none;
+      }
+
+      .url p:hover,
+      .url .active {
+        background-color: #e8f5ff;
+        border-radius: 28px;
+        color: rgb(155,155,155);
+        margin-left: 14%;
+        width: 65%;
+      }
+
+      /* End */
+
+      /* Main */
+      .main {
+        margin-top: 2%;
+        margin-left: 29%;
+        font-size: 28px;
+        padding: 0 10px;
+        width: 58%;
+      }
+
+      .main h2 {
+        color: rgb(155,155,155);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .main .card {
+        background: rgb(45,45,45);
+        border-radius: 18px;
+        box-shadow: 1px 1px 8px 0 grey;
+        height: auto;
+        margin-bottom: 20px;
+        padding: 20px 0 20px 50px;
+      }
+
+      .main .card table {
+        border: none;
+        font-size: 16px;
+        height: 270px;
+        width: 80%;
+      }
+
+      .edit {
+        position: absolute;
+        color: #e7e7e8;
+        right: 14%;
+      }
+
+      .main .card2 {
+        border: none;
+        font-size: 16px;
+        height: auto;
+        width: 100%;
+      }
+
+      .card2 .ordered {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 90%;
+      }
+
+      .ordercard {
+        height: 200px;
+        width: 80%;
+        clip-path: polygon(
+          83.8% 0%,
+          87.6% 4.5%,
+          91.4% 0%,
+          99.8% 0%,
+          100.2% 100.3%,
+          92% 100.3%,
+          88.1% 95.8%,
+          84.3% 100.3%,
+          0% 100.3%,
+          0% 0%
+        );
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        border: 2px solid black;
+        margin: 10px;
+        background: rgb(45,45,45);
+        color: rgb(155,155,155);  
+      }
+
+      .ordercard .img {
+        position: relative;
+        width: 30%;
+        height: 100%;
+      }
+
+      .ordercard .img img {
+        /* position: absolute; */
+        width: 100%;
+        height: 120%;
+        /* background-size: cover;
+        background-position: center; */
+      }
+
+      .ordercard .details {
+        position: relative;
+        width: 58%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .ordercard .details div {
+        margin-left: 20px;
+      }
+
+      .ordercard .logo {
+        position: relative;
+        width: 12%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ordercard .logo h3 {
+        writing-mode: vertical-rl;
+      }
+
+      table{
+        color: rgb(155,155,155);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="navbar-top">
+        <div class="title">
+          <h1>Profile page</h1>
+        </div>
+        <ul>
+          <li>
+            <a href="./index.html">
+              <i class="fa fa-sign-out-alt fa-2x"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidenav">
+        <div class="profile">
+          <img
+            src="./image/logo/transparent.png"
+            alt=""
+            width="100"
+            height="100"
+          />
+
+          <div class="name">CelebrateNow</div>
+        </div>
+      </div>
+      <!-- End -->
+
+      <!-- Main -->
+      <div class="main">
+        <h2>IDENTITY</h2>
+        <div class="card">
+          <div class="card-body">
+            <i class="fa fa-pen fa-xs edit"></i>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>:</td>
+                  <td id="name"></td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>:</td>
+                  <td id="email"></td>
+                </tr>
+                <tr>
+                  <td>moblie</td>
+                  <td>:</td>
+                  <td id="mobile"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2>BOOKING ORDERED</h2>
+        <div class="card2">
+          <div class="ordered" id="ordered"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let url=window.location.href.split("/");
+url.pop();
+url=url.join("/");
+      let userD = localStorage.getItem("userData");
+  if(userD==null)
+  {
+    window.location=`${url}/index.html`;
+  }
+      if (localStorage.getItem("userData") != null) {
+        let user = JSON.parse(
+          localStorage.getItem(localStorage.getItem("userData"))
+        );
+        console.log(user);
+        document.getElementById("name").innerHTML = user.name;
+        document.getElementById("email").innerHTML = user.email;
+        document.getElementById("mobile").innerHTML = user.mobile;
+
+        console.log(user.order);
+
+        let str = "";
+        for (let i = user.order.length-1; i >=0; i--) {
+          str += `
+                <div class="ordercard">
+                  <div class="img"><img src="${user.order[i].img}" alt="img"></div>
+             
+                 <div class="details">
+                   <div><h1>${user.order[i].event_name}</h1></div>
+                   <div>
+                     <p>DATE</p>
+                     <h3>${user.order[i].date}</h3>
+                   </div>
+                   <div>
+                     <p>location</p>
+                     <h3>${user.order[i].location}</h3>
+                   </div>
+                   <div>
+                     <p>seat</p>
+                     <h3>${user.order[i].seat}</h3>
+                   </div>
+                 </div>
+                 <div class="logo">
+                   <h3> <img src="./image/logo/transparent.png" style="transform: rotate(90deg);" height="30px" width="30px" /> CeleebrateNow</h3>
+                 </div>
+                    </div>
+                `;
+        }
+
+        document.getElementById("ordered").innerHTML = str;
+      }
+    </script>
+  </body>
+</html>

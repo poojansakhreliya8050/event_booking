@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        font-size: 20px;
+        box-sizing: inherit;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        font: 1em/1.618 Inter, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 30px;
+        color: black;
+        background: url("./image/bg.jpeg") center / cover no-repeat fixed;
+      }
+
+      .signup {
+        position: relative;
+        min-width: 400px;
+        min-height: 450px;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(15px);
+      }
+
+      input {
+        background: 0;
+        border: 0;
+        outline: none;
+        width: 100%;
+        min-width: 300px;
+        font-size: 1.5em;
+        transition: padding 0.3s 0.2s ease;
+        font-size: 20px;
+      }
+
+      input:focus {
+        padding-bottom: 5px;
+      }
+
+      input:focus + .line {
+        &:after {
+          transform: scaleX(1);
+        }
+      }
+
+      .field {
+        position: relative;
+      }
+
+      .line {
+        width: 100%;
+        height: 3px;
+        position: absolute;
+        bottom: -8px;
+        background: #909192;
+      }
+      .line:after {
+        content: " ";
+        position: absolute;
+        float: right;
+        width: 100%;
+        height: 3px;
+        transform: scalex(0);
+        transition: transform 0.3s ease;
+        background: rgb(100, 100, 100);
+      }
+    
+      .btn {
+        background-color: rgb(208, 74, 74);
+        border: 2px solid #1a1a1a;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 20px;
+        min-height: 40px;
+        min-width: 40px;
+        padding: 0 25px;
+        text-align: center;
+        transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .btn:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+      }
+
+      .btn:active {
+        box-shadow: none;
+        transform: translateY(0);
+      }
+
+      .footer-link span {
+        font-size: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup">
+      <div>
+        <h4>Sign up to your account</h4>
+      </div>
+      <div class="field">
+        <input id="name" type="text" placeholder="Name" />
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <input id="mobile" type="text" placeholder="Mobile Number" />
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <input id="email" type="text" placeholder="Email" />
+        <span class="line"></span>
+      </div>
+      <div class="field">
+        <input id="password" type="password" placeholder="Password" />
+        <span class="line"></span>
+      </div>
+      <div>
+        <button class="btn" id="signup">Sign up</button>
+      </div>
+      <div>
+        <span>Already have an account? <a href="./signin.html">Sign in</a></span>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
