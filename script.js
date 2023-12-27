@@ -1025,11 +1025,11 @@ if(nav!=null)
 {
   let add = nav.innerHTML;
   if (user == null)
-    add += "<li><a href='./signin.html'>LOGIN</a></li>"
+    add += "<a href='./signin.html'>LOGIN</a>"
   else {
-    add += "<li><a href='./cart.html'>CART</a></li>";
-    add += `<li><a href='./profile.html'>${JSON.parse(localStorage.getItem(localStorage.getItem("userData"))).name}</a></li>`;
-    add += `<li style='cursor: pointer;' onclick="localStorage.removeItem('userData'); window.location = '${url}/index.html';">LOGOUT</li>`;
+    add += "<a href='./cart.html'>CART</a>";
+    add += `<a href='./profile.html'>${JSON.parse(localStorage.getItem(localStorage.getItem("userData"))).name}</a>`;
+    add += `<a style='cursor: pointer;' onclick="localStorage.removeItem('userData'); window.location = '${url}/index.html';">LOGOUT</a>`;
   }
   nav.innerHTML = add;
 }

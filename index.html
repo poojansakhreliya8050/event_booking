@@ -17,18 +17,28 @@
 
   </head>
   <body style="background-color: rgb(68,68,66);">
-    <header>
-      <div class="header-container">
-        <img src="./image/logo/name.png" alt="logo" height="20px" >
-        <nav id="nav">
-          <ul id="nav-ul">
-            <li><a href="./index.html">HOME</a></li>
-            <li style="cursor: pointer;" onclick="gotoEvent()">EVENTS</li>
-            <li><a href="./contact.html">CONTECT</a></li>
-          </ul>
-        </nav>
+
+    <div class="nav">
+      <input type="checkbox" id="nav-check">
+      <div class="nav-header">
+        <div class="nav-title">
+          <img src="./image/logo/name.png" alt="logo" height="20px" >
+        </div>
       </div>
-    </header>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+      
+      <div class="nav-links" id="nav-ul">
+        <a href="./index.html">HOME</a>
+        <a style="cursor: pointer;" onclick="gotoEvent()">EVENTS</a>
+        <a href="./contact.html">CONTECT</a>  
+      </div>
+    </div>
 
     <div class="carousel">
       <div class="carousel-inner">
@@ -76,7 +86,9 @@
     <!-- <div class="homeImage"></div> -->
 
     <h1 style="text-align: center; margin: 20px 0px;">EVENTS</h1>
-    <div id="events"></div>
+    <div id="eventmain">
+      <div id="events"></div>
+    </div>
 
     <div class="footer">
       <p>&copy; 2023 celebrateNow All rights reserved.</p>
