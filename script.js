@@ -1182,13 +1182,38 @@ if (filename=="signup.html") {
     window.location=`${url}/index.html`;
   }
 
-  document.getElementById("signup").addEventListener("click", signup)
+  document.getElementById("signup").addEventListener("click", signup);
+
   function signup() {
-    console.log("hello");
+   
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
     let email = document.getElementById("email").value.toLowerCase();
     let password = document.getElementById("password").value.toLowerCase();
+
+    if(name.length==0 || email.length==0|| password.length==0 || mobile.length==0 )
+    {
+      alert("please enter all the data..");
+      return;
+    }
+    let mobileexp=/^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
+    let emailexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if(!mobileexp.test(mobile))
+    {
+      alert("Please enter valid mobile number");
+      return;
+    }
+    if(!emailexp.test(email))
+    {
+      alert("Please enter valid email address");
+      return;
+    }
+    if(password.length<8)
+    {
+      alert("Please enter minimum 8 character on password");
+      return;
+    }
     if (JSON.parse(localStorage.getItem(email)) == null) {
       localStorage.setItem(email, JSON.stringify({
         "name": name, "mobile": mobile, "email": email, "password": password, "cart": [], "order": []
@@ -1215,6 +1240,24 @@ if (filename=="signin.html") {
   function signin() {
     let email = document.getElementById("email").value.toLowerCase();
     let password = document.getElementById("password").value.toLowerCase();
+    if( email.length==0|| password.length==0  )
+    {
+      alert("Please enter all the data..");
+      return;
+    }
+
+    let emailexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if(!emailexp.test(email))
+    {
+      alert("Please enter valid email address");
+      return;
+    }
+    if(password.length<8)
+    {
+      alert("Please enter minimum 8 character on password");
+      return;
+    }
     console.log(JSON.parse(localStorage.getItem(email)));
     if (JSON.parse(localStorage.getItem(email)) != null && JSON.parse(localStorage.getItem(email)).email == email && JSON.parse(localStorage.getItem(email)).password == password) {
       localStorage.setItem("userData", email);
@@ -1231,14 +1274,169 @@ if (filename=="signin.html") {
 
 if (filename=="cart.html")
 {
-  let nav = document.getElementById("nav-ul");
-  let add = nav.innerHTML;
-  if (user == null)
-    add += "<li><a href='./signin.html'>login</a></li>"
-  else {
-    add += "<li><a href='./cart.html'>cart</a></li>";
-    add += `<li style='color: red; cursor: pointer;' onclick="localStorage.removeItem('userData'); window.location = '${url}/index.html';">logout</li>`;
-  }
-  nav.innerHTML = add;
+  
+let url=window.location.href.split("/");
+url.pop();
+url=url.join("/");
 
+let userD = localStorage.getItem("userData");
+  if(userD==null)
+  {
+    window.location=`${url}/index.html`;
+  }
+      let allTotal = 0;
+
+      let cart = document.getElementById("cart");
+      let user = JSON.parse(
+        localStorage.getItem(localStorage.getItem("userData"))
+      );
+      let cartItem = user.cart;
+      console.log(user);
+
+      function increaseSeat(id) {
+        for (let i = 0; i < user.cart.length; i++) {
+          if (user.cart[i].id == id) {
+            user.cart[i].seat = user.cart[i].seat + 1;
+            break;
+          }
+        }
+
+        console.log(user);
+
+        localStorage.setItem(
+          localStorage.getItem("userData"),
+          JSON.stringify(user)
+        );
+        window.location = `${url}/cart.html`;
+      }
+
+      function decreaseSeat(id) {
+        for (let i = 0; i < user.cart.length; i++) {
+          if (user.cart[i].id == id) {
+            user.cart[i].seat = user.cart[i].seat - 1;
+            if (user.cart[i].seat == 0) {
+              user.cart = user.cart.filter((item) => item.id != id);
+            }
+            break;
+          }
+        }
+        localStorage.setItem(
+          localStorage.getItem("userData"),
+          JSON.stringify(user)
+        );
+        window.location = `${url}/cart.html`;
+      }
+
+      function removeAll() {
+        if(confirm("Are you sure ?"))
+        {
+        user.cart = [];
+        localStorage.setItem(
+          localStorage.getItem("userData"),
+          JSON.stringify(user)
+        );
+        window.location = `${url}/cart.html`;
+        }
+      }
+
+      function checkOut() {
+        user.order = [...user.order, ...user.cart];
+        user.cart = [];
+        localStorage.setItem(
+          localStorage.getItem("userData"),
+          JSON.stringify(user)
+        );
+        alert("Successfully booked event ticket..")
+        window.location = `${url}/profile.html`;
+      }
+
+      let str = `
+      
+      <div class="Header">
+        <h3 class="Heading">Booking Cart</h3>
+        <h5 class="Action" onclick="removeAll()">Remove all</h5>
+      </div>`;
+
+      for (let i = 0; i < cartItem.length; i++) {
+        let total = cartItem[i].price * cartItem[i].seat;
+        allTotal += total;
+        str += `
+        <div class="Cart-Items">
+        <div class="image-box">
+          <img src="${cartItem[i].img}" style="height: 120px" />
+        </div>
+        <div class="about">
+          <h1 class="title">${cartItem[i].event_name}</h1>
+          <h3 class="subtitle">${cartItem[i].price} &#8377;</h3>
+          <h3>${cartItem[i].location}</h3>
+        </div>
+        <div class="counter">
+          <div class="btn inc" onclick="increaseSeat(${cartItem[i].id})">+</div>
+          <div class="count">${cartItem[i].seat}</div>
+          <div class="btn dec" onclick="decreaseSeat(${cartItem[i].id})">-</div>
+        </div>
+        <div class="prices">
+          <div class="amount">${total} &#8377;</div>
+        </div>
+      </div>
+      <hr/>
+        `;
+      }
+
+      str += `
+      <div class="checkout">
+        <div class="total">
+          <div>
+            <div class="Subtotal">Total</div>
+          </div>
+          <div class="total-amount">${allTotal} &#8377;</div>
+        </div>
+        <button class="button" type="button" onclick="checkOut()">Checkout</button>
+      </div>
+    </div>`;
+
+      cart.innerHTML = str;
+
+}
+
+//contactUs page
+
+if (filename=="contact.html")
+{
+     document.getElementById("btn").addEventListener("click",feedback);
+     function feedback()
+     {
+
+      let name = document.getElementById("name").value;
+      let mobile = document.getElementById("mobile").value;
+      let email = document.getElementById("email").value.toLowerCase();
+      let message = document.getElementById("message").value.toLowerCase();
+  
+      if(name.length==0 || email.length==0|| message.length==0 || mobile.length==0 )
+      {
+        alert("please enter all the data..");
+        return;
+      }
+      let mobileexp=/^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
+      let emailexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  
+      if(!mobileexp.test(mobile))
+      {
+        alert("Please enter valid mobile number");
+        return;
+      }
+      if(!emailexp.test(email))
+      {
+        alert("Please enter valid email address");
+        return;
+      }
+      if(message.length<20)
+      {
+        alert("Please enter minimum 20 character on message field");
+        return;
+      }
+      alert("Thank you for sending feedback..");
+      window.location = `${url}/contact.html`
+
+     }
 }

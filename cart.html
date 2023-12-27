@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
     <style>
       body {
         margin: 0;
         padding: 0;
-        /* background: url("./image/bg.jpeg") center / cover no-repeat fixed; */
-        /* background: linear-gradient(to bottom right, #e3f0ff, #fafcff); */
         background-color: #444442;
         height: 100vh;
         display: flex;
@@ -19,11 +18,11 @@
         margin-top: 5rem;
         width: 70%;
         height: 95%;
-        /* background-color: #ffffff; */
         background-color: rgb(255 255 255 / 0.3);
         border-radius: 20px;
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(5px);
+        margin-left: 13%;
       }
       .Header {
         margin: auto;
@@ -61,6 +60,11 @@
       }
       .about {
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        
       }
       .title {
         padding-top: 5px;
@@ -177,130 +181,25 @@
     </style>
   </head>
   <body>
+    <div>
+
+      <header>
+        <div class="header-container">
+          <img src="./image/logo/name.png" alt="logo" height="20px" >
+          <nav id="nav">
+          <ul id="nav-ul">
+            <li><a href="./index.html">HOME</a></li>
+            <li style="cursor: pointer;" onclick="gotoEvent()">EVENTS</li>
+            <li><a href="./contact.html">CONTECT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
     <div class="Cart-Container" id="cart"></div>
+    
+    </div>
+    <script src="./script.js"></script>
 
-    <script>
-
-let url=window.location.href.split("/");
-url.pop();
-url=url.join("/");
-
-let userD = localStorage.getItem("userData");
-  if(userD==null)
-  {
-    window.location=`${url}/index.html`;
-  }
-      let allTotal = 0;
-
-      let cart = document.getElementById("cart");
-      let user = JSON.parse(
-        localStorage.getItem(localStorage.getItem("userData"))
-      );
-      let cartItem = user.cart;
-      console.log(user);
-
-      function increaseSeat(id) {
-        for (let i = 0; i < user.cart.length; i++) {
-          if (user.cart[i].id == id) {
-            user.cart[i].seat = user.cart[i].seat + 1;
-            break;
-          }
-        }
-
-        console.log(user);
-
-        localStorage.setItem(
-          localStorage.getItem("userData"),
-          JSON.stringify(user)
-        );
-        window.location = `${url}/cart.html`;
-      }
-
-      function decreaseSeat(id) {
-        for (let i = 0; i < user.cart.length; i++) {
-          if (user.cart[i].id == id) {
-            user.cart[i].seat = user.cart[i].seat - 1;
-            if (user.cart[i].seat == 0) {
-              user.cart = user.cart.filter((item) => item.id != id);
-            }
-            break;
-          }
-        }
-        localStorage.setItem(
-          localStorage.getItem("userData"),
-          JSON.stringify(user)
-        );
-        window.location = `${url}/cart.html`;
-      }
-
-      function removeAll() {
-        if(confirm("Are you sure ?"))
-        {
-        user.cart = [];
-        localStorage.setItem(
-          localStorage.getItem("userData"),
-          JSON.stringify(user)
-        );
-        window.location = `${url}/cart.html`;
-        }
-      }
-
-      function checkOut() {
-        user.order = [...user.order, ...user.cart];
-        user.cart = [];
-        localStorage.setItem(
-          localStorage.getItem("userData"),
-          JSON.stringify(user)
-        );
-        alert("Successfully booked event ticket..")
-        window.location = `${url}/profile.html`;
-      }
-
-      let str = `<div class="Header">
-        <h3 class="Heading">Booking Cart</h3>
-        <h5 class="Action" onclick="removeAll()">Remove all</h5>
-      </div>`;
-
-      for (let i = 0; i < cartItem.length; i++) {
-        let total = cartItem[i].price * cartItem[i].seat;
-        allTotal += total;
-        str += `
-        <div class="Cart-Items">
-        <div class="image-box">
-          <img src="${cartItem[i].img}" style="height: 120px" />
-        </div>
-        <div class="about">
-          <h1 class="title">${cartItem[i].event_name}</h1>
-          <h3 class="subtitle">${cartItem[i].price} &#8377;</h3>
-          <h3>${cartItem[i].location}</h3>
-        </div>
-        <div class="counter">
-          <div class="btn inc" onclick="increaseSeat(${cartItem[i].id})">+</div>
-          <div class="count">${cartItem[i].seat}</div>
-          <div class="btn dec" onclick="decreaseSeat(${cartItem[i].id})">-</div>
-        </div>
-        <div class="prices">
-          <div class="amount">${total} &#8377;</div>
-        </div>
-      </div>
-      <hr/>
-        `;
-      }
-
-      str += `
-      <div class="checkout">
-        <div class="total">
-          <div>
-            <div class="Subtotal">Total</div>
-          </div>
-          <div class="total-amount">${allTotal} &#8377;</div>
-        </div>
-        <button class="button" type="button" onclick="checkOut()">Checkout</button>
-      </div>
-    </div>`;
-
-      cart.innerHTML = str;
-    </script>
-    <!-- <script src="./script.js"></script> -->
   </body>
 </html>
