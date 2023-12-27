@@ -1371,9 +1371,9 @@ let userD = localStorage.getItem("userData");
           <h3>${cartItem[i].location}</h3>
         </div>
         <div class="counter">
-          <div class="btn inc" onclick="increaseSeat(${cartItem[i].id})">+</div>
-          <div class="count">${cartItem[i].seat}</div>
-          <div class="btn dec" onclick="decreaseSeat(${cartItem[i].id})">-</div>
+        <div class="btn dec" onclick="decreaseSeat(${cartItem[i].id})">-</div>
+        <div class="count">${cartItem[i].seat}</div>
+        <div class="btn inc" onclick="increaseSeat(${cartItem[i].id})">+</div>
         </div>
         <div class="prices">
           <div class="amount">${total} &#8377;</div>
