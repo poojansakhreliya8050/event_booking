@@ -1440,3 +1440,58 @@ if (filename=="contact.html")
 
      }
 }
+
+//profile page
+
+if (filename=="profile.html")
+{
+  // let url=window.location.href.split("/");
+  // url.pop();
+  // url=url.join("/");
+        let userD = localStorage.getItem("userData");
+    if(userD==null)
+    {
+      window.location=`${url}/index.html`;
+    }
+        if (localStorage.getItem("userData") != null) {
+          let user = JSON.parse(
+            localStorage.getItem(localStorage.getItem("userData"))
+          );
+          console.log(user);
+          document.getElementById("name").innerHTML = user.name;
+          document.getElementById("email").innerHTML = user.email;
+          document.getElementById("mobile").innerHTML = user.mobile;
+  
+          console.log(user.order);
+  
+          let str = "";
+          for (let i = user.order.length-1; i >=0; i--) {
+            str += `
+                  <div class="ordercard">
+                    <div class="img"><img src="${user.order[i].img}" alt="img"></div>
+               
+                   <div class="details">
+                     <div><h1>${user.order[i].event_name}</h1></div>
+                     <div>
+                       <p>DATE</p>
+                       <h3>${user.order[i].date}</h3>
+                     </div>
+                     <div>
+                       <p>location</p>
+                       <h3>${user.order[i].location}</h3>
+                     </div>
+                     <div>
+                       <p>seat</p>
+                       <h3>${user.order[i].seat}</h3>
+                     </div>
+                   </div>
+                   <div class="logo">
+                     <h3> <img src="./image/logo/transparent.png" style="transform: rotate(90deg);" height="30px" width="30px" /> CeleebrateNow</h3>
+                   </div>
+                      </div>
+                  `;
+          }
+  
+          document.getElementById("ordered").innerHTML = str;
+        }
+}

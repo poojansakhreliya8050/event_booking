@@ -17,6 +17,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="./style.css">
 
     <style>
       /* Import Font Dancing Script */
@@ -32,19 +33,13 @@
       }
 
       /* NavbarTop */
-      .navbar-top {
+      /* .navbar-top {
         background: rgb(45,45,45);
         color: rgb(155,155,155);
         height: 70px;
         z-index: 1;
       }
 
-      .title {
-        font-family: "Dancing Script", cursive;
-        padding-top: 15px;
-        position: absolute;
-        left: 45%;
-      }
 
       .navbar-top ul {
         float: right;
@@ -63,7 +58,8 @@
         padding: 14px 16px;
         text-align: center;
         text-decoration: none;
-      }
+      } */
+
 
       /* Sidenav */
       .sidenav {
@@ -89,6 +85,14 @@
         border-radius: 50%;
         box-shadow: 0px 0px 5px 1px grey;
       } */
+
+      
+      .title {
+        font-family: "Dancing Script", cursive;
+        width: 80%;
+        margin-bottom: 10px;
+       text-align: center;
+      }
 
       .name {
         font-size: 20px;
@@ -155,6 +159,7 @@
         height: auto;
         margin-bottom: 20px;
         padding: 20px 0 20px 50px;
+        width: 90%;
       }
 
       .main .card table {
@@ -256,20 +261,23 @@
   </head>
   <body>
     <div>
-      <div class="navbar-top">
-        <div class="title">
-          <h1>Profile page</h1>
+
+      <header>
+        <div class="header-container">
+          <img src="./image/logo/name.png" alt="logo" height="20px" >
+          <nav id="nav">
+            <ul id="nav-ul">
+              <li><a href="./index.html">HOME</a></li>
+              <li style="cursor: pointer;" onclick="gotoEvent()">EVENTS</li>
+              <li><a href="./contact.html">CONTECT</a></li>
+            </ul>
+          </nav>
         </div>
-        <ul>
-          <li>
-            <a href="./index.html">
-              <i class="fa fa-sign-out-alt fa-2x"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+      </header>
 
       <div class="sidenav">
+ 
+
         <div class="profile">
           <img
             src="./image/logo/transparent.png"
@@ -285,6 +293,11 @@
 
       <!-- Main -->
       <div class="main">
+        
+        <div class="title">
+          <h1 >Profile page</h1>
+        </div>
+
         <h2>IDENTITY</h2>
         <div class="card">
           <div class="card-body">
@@ -317,56 +330,6 @@
       </div>
     </div>
 
-    <script>
-      let url=window.location.href.split("/");
-url.pop();
-url=url.join("/");
-      let userD = localStorage.getItem("userData");
-  if(userD==null)
-  {
-    window.location=`${url}/index.html`;
-  }
-      if (localStorage.getItem("userData") != null) {
-        let user = JSON.parse(
-          localStorage.getItem(localStorage.getItem("userData"))
-        );
-        console.log(user);
-        document.getElementById("name").innerHTML = user.name;
-        document.getElementById("email").innerHTML = user.email;
-        document.getElementById("mobile").innerHTML = user.mobile;
-
-        console.log(user.order);
-
-        let str = "";
-        for (let i = user.order.length-1; i >=0; i--) {
-          str += `
-                <div class="ordercard">
-                  <div class="img"><img src="${user.order[i].img}" alt="img"></div>
-             
-                 <div class="details">
-                   <div><h1>${user.order[i].event_name}</h1></div>
-                   <div>
-                     <p>DATE</p>
-                     <h3>${user.order[i].date}</h3>
-                   </div>
-                   <div>
-                     <p>location</p>
-                     <h3>${user.order[i].location}</h3>
-                   </div>
-                   <div>
-                     <p>seat</p>
-                     <h3>${user.order[i].seat}</h3>
-                   </div>
-                 </div>
-                 <div class="logo">
-                   <h3> <img src="./image/logo/transparent.png" style="transform: rotate(90deg);" height="30px" width="30px" /> CeleebrateNow</h3>
-                 </div>
-                    </div>
-                `;
-        }
-
-        document.getElementById("ordered").innerHTML = str;
-      }
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
